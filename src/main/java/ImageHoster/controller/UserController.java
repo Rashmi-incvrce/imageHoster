@@ -44,15 +44,13 @@ public class UserController {
     public String registerUser(User user,Model model) {
         if(!IHValidator.getIHValidatorInstance().validatePassword(user.getPassword())){
             String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
-            User newUser = new User();
-            UserProfile profile = new UserProfile();
-            newUser.setProfile(profile);
-            model.addAttribute("User", newUser);
+            model.addAttribute("User", user);
             model.addAttribute("passwordTypeError",error);
             return "users/registration";
+        }else {
+            userService.registerUser(user);
+            return "redirect:/users/login";
         }
-        userService.registerUser(user);
-        return "redirect:/users/login";
     }
 
     //This controller method is called when the request pattern is of type 'users/login'
