@@ -202,9 +202,11 @@ public class ImageController {
             tagString.append(tags.get(i).getName()).append(",");
         }
 
+        if(tags.size()!=0){
         Tag lastTag = tags.get(tags.size() - 1);
         tagString.append(lastTag.getName());
 
-        return tagString.toString();
+        return tagString.toString();}
+        else return "";
     }
 }
