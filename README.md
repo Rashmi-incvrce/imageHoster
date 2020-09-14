@@ -1,1 +1,1 @@
-# Test
+# Sample image hoster application
