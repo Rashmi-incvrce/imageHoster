@@ -1,10 +1,14 @@
 package ImageHoster.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 //@Entity annotation specifies that the corresponding class is a JPA entity
 @Entity
-
 //@Table annotation provides more options to customize the mapping.
 //Here the name of the table to be created in the database is explicitly mentioned as 'user_profile'. Hence the table named 'user_profile' will be created in the database with all the columns mapped to all the attributes in 'UserProfile' class
 @Table(name = "user_profile")

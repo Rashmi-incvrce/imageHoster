@@ -7,12 +7,11 @@ public class IHValidator {
 
     private static IHValidator ihValidator;
 
-    private IHValidator(){
-
+    private IHValidator() {
     }
 
-    public static IHValidator getIHValidatorInstance(){
-        if(ihValidator == null)
+    public static IHValidator getIHValidatorInstance() {
+        if (ihValidator == null)
             ihValidator = new IHValidator();
         return ihValidator;
     }
@@ -21,16 +20,13 @@ public class IHValidator {
     //Method to validate password strength
     //Returns true if Password contains at least 1 alphabet, 1 number & 1 special character
     //Else returns false
-    public boolean validatePassword(String password){
-
-        String regex ="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].{2,}$";
-
+    public boolean validatePassword(String password) {
+        String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].{2,}$";
         Pattern p = Pattern.compile(regex);
         if (password == null) {
             return false;
         }
         Matcher m = p.matcher(password);
-
         return m.matches();
     }
 }

@@ -11,15 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
-
 @Entity
 @Table(name = "Comments")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "text",columnDefinition = "TEXT")
+    @Column(name = "text", columnDefinition = "TEXT")
     private String text;
 
     @Column(name = "createdDate")

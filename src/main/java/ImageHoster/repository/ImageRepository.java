@@ -3,7 +3,12 @@ package ImageHoster.repository;
 import ImageHoster.model.Image;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 //The annotation is a special type of @Component annotation which describes that the class defines a data repository
@@ -21,10 +26,8 @@ public class ImageRepository {
     //The transaction is committed if it is successful
     //The transaction is rolled back in case of unsuccessful transaction
     public Image uploadImage(Image newImage) {
-
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-
         try {
             transaction.begin();
             em.persist(newImage);
@@ -42,7 +45,6 @@ public class ImageRepository {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Image> query = em.createQuery("SELECT i from Image i", Image.class);
         List<Image> resultList = query.getResultList();
-
         return resultList;
     }
 
@@ -78,7 +80,6 @@ public class ImageRepository {
     public void updateImage(Image updatedImage) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-
         try {
             transaction.begin();
             em.merge(updatedImage);
@@ -99,7 +100,6 @@ public class ImageRepository {
     public void deleteImage(Integer imageId) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-
         try {
             transaction.begin();
             Image image = em.find(Image.class, imageId);
