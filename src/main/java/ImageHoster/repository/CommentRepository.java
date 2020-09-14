@@ -20,14 +20,14 @@ public class CommentRepository {
     //Starts a transaction
     //The transaction is committed if it is successful
     //The transaction is rolled back in case of unsuccessful transaction
-    public Comment addComment(Comment newComment){
+    public Comment addComment(Comment newComment) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        try{
+        try {
             et.begin();
             em.persist(newComment);
             et.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             et.rollback();
         }
         return newComment;

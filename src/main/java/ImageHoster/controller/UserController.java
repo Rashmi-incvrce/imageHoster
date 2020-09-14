@@ -41,13 +41,13 @@ public class UserController {
     //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request is of POST type
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
-    public String registerUser(User user,Model model) {
-        if(!IHValidator.getIHValidatorInstance().validatePassword(user.getPassword())){
+    public String registerUser(User user, Model model) {
+        if (!IHValidator.getIHValidatorInstance().validatePassword(user.getPassword())) {
             String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
             model.addAttribute("User", user);
-            model.addAttribute("passwordTypeError",error);
+            model.addAttribute("passwordTypeError", error);
             return "users/registration";
-        }else {
+        } else {
             userService.registerUser(user);
             return "users/login";
         }
@@ -82,7 +82,6 @@ public class UserController {
     @RequestMapping(value = "users/logout", method = RequestMethod.POST)
     public String logout(Model model, HttpSession session) {
         session.invalidate();
-
         List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
         return "index";

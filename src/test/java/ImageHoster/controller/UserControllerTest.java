@@ -18,7 +18,10 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
 @RunWith(SpringRunner.class)
@@ -58,8 +61,6 @@ public class UserControllerTest {
         user.setId(1);
         user.setUsername("Abhi");
         user.setPassword("password");
-
-
         this.mockMvc.perform(post("/users/registration")
                 .flashAttr("user", user)
         )
@@ -79,9 +80,7 @@ public class UserControllerTest {
         user.setId(1);
         user.setUsername("Abhi");
         user.setPassword("password1@");
-
-
-       this.mockMvc.perform(post("/users/registration")
+        this.mockMvc.perform(post("/users/registration")
                 .flashAttr("user", user)
         )
                 .andExpect(view().name("users/login"))
@@ -104,11 +103,8 @@ public class UserControllerTest {
         User userSignin = new User();
         userSignin.setUsername("Abhi");
         userSignin.setPassword("password1@");
-
         Mockito.when(userService.login(Mockito.anyObject())).thenReturn(null);
         session = new MockHttpSession();
-
-
         this.mockMvc.perform(post("/users/login").session(session)
                 .flashAttr("user", userSignin)
         )
@@ -129,15 +125,11 @@ public class UserControllerTest {
         user.setId(1);
         user.setUsername("Abhi");
         user.setPassword("password");
-
         User userSignin = new User();
         userSignin.setUsername("Abhi");
         userSignin.setPassword("password1@");
-
         Mockito.when(userService.login(Mockito.anyObject())).thenReturn(user);
         session = new MockHttpSession();
-
-
         this.mockMvc.perform(post("/users/login").session(session)
                 .flashAttr("user", userSignin)
         )
@@ -158,10 +150,8 @@ public class UserControllerTest {
         user.setId(1);
         user.setUsername("Abhi");
         user.setPassword("password");
-
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
-
         this.mockMvc.perform(post("/users/logout").session(session))
                 .andExpect(view().name("index"))
                 .andExpect(content().string(containsString("Image Hoster")));
