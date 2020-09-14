@@ -22,7 +22,8 @@ public class IHValidator {
     //Returns true if Password contains at least 1 alphabet, 1 number & 1 special character
     //Else returns false
     public boolean validatePassword(String password){
-        String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&].{3,}$";
+
+        String regex ="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].{2,}$";
 
         Pattern p = Pattern.compile(regex);
         if (password == null) {
